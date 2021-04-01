@@ -20,7 +20,6 @@ gulp dev
 
 ## Change path templates
 
-
 In `settings.py`.
 
 ``` python
@@ -50,7 +49,7 @@ Update `DIRS`.
 # Run development
 
 ``` sh
-docker-compose -f docker-compose.dev.yaml up
+make run.server
 ```
 
 Now open:
@@ -74,7 +73,7 @@ docker exec -it api_django_1 bash
 # Run production
 
 ``` sh
-docker-compose up -d
+docker-compose -f docker-compose.pro.yaml up
 ```
 
 Open `https://domain.com`.
