@@ -4,7 +4,7 @@ services:
 
   db:
     image: postgres
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./../postgres_data:/var/lib/postgresql/data
     environment:
@@ -17,7 +17,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfiles/django/Dockerfile
-    restart: always
+    restart: unless-stopped
     entrypoint: /django-launcher.dev.sh
     volumes:
       - .:/usr/src/app/
@@ -46,7 +46,7 @@ services:
 
   caddy:
     image: caddy:alpine
-    restart: always
+    restart: unless-stopped
     ports:
         - 80:80
         - 443:443
@@ -59,7 +59,7 @@ services:
 
   mailhog:
     image: mailhog/mailhog:latest
-    restart: always
+    restart: unless-stopped
     expose:
         - 1025:1025
     ports:
