@@ -8,35 +8,34 @@ services:
     volumes:
       - ./../postgres_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: kualitte
+      POSTGRES_DB: guitarlions
       POSTGRES_PASSWORD: postgres
     expose:
       - 5432
 
   django:
-    build:
-      context: .
-      dockerfile: ./Dockerfiles/django/Dockerfile
+    build: .
     restart: always
     entrypoint: /django-launcher.dev.sh
     volumes:
       - .:/usr/src/app/
     environment:
       DEBUG: "True"
-      ALLOWED_HOSTS: "beta.neo.kualitteauctions.com"
-      SECRET_KEY: "mysecret"
+      ALLOWED_HOSTS: ""
+      SECRET_KEY: "secret"
       DB_HOST: db
-      DB_NAME: "kualitte"
+      DB_NAME: "guitarlions"
       DB_USER: "postgres"
       DB_PASSWORD: "postgres"
       DB_PORT: "5432"
-      DOMAIN: "beta.neo.kualitteauctions.com"
-      DOMAIN_URL: "https://beta.neo.kualitteauctions.com"
+      DOMAIN: ""
+      DOMAIN_URL: "https://"
       STATIC_URL: "/static/"
       MEDIA_URL: "/media/"
-      EMAIL_HOST: "mailhog"
-      EMAIL_USE_TLS: "False"
-      EMAIL_PORT: "1025"
+      EMAIL_USE_TLS: True
+      EMAIL_HOST: ""
+      EMAIL_USE_TLS: "True"
+      EMAIL_PORT: "2525"
       EMAIL_USER: ""
       EMAIL_PASSWORD: ""
     expose:
@@ -51,21 +50,17 @@ services:
         - 80:80
         - 443:443
     volumes:
-        - ./Caddyfile:/etc/caddy/Caddyfile
-        - ./../caddy_data:/data
         - .:/usr/src/app/
+        - ./Caddyfile.staging:/etc/caddy/Caddyfile
+        - ./../caddy_data:/data
     depends_on:
       - django
 
   gulp:
-    build:
-      context: .
-      dockerfile: ./Dockerfiles/gulp/Dockerfile
+    build: Dockerfiles/gulp
     restart: always
     command: gulp
     volumes:
-        - ./gulpfile.js:/usr/src/app/gulpfile.js
-        - ./assets:/usr/src/app/assets
-        - ./static:/usr/src/app/static
+        - .:/app/
     depends_on:
       - caddy
