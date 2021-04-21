@@ -33,6 +33,7 @@ services:
       DOMAIN: "api.localhost"
       DOMAIN_URL: "http://api.localhost"
       STATIC_URL: "/static/"
+      STATIC_ROOT: "static"
       MEDIA_URL: "/media/"
       EMAIL_HOST: "mailhog"
       EMAIL_USE_TLS: "False"
