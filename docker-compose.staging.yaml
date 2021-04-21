@@ -31,6 +31,7 @@ services:
       DOMAIN: ""
       DOMAIN_URL: "https://"
       STATIC_URL: "/static/"
+      STATIC_ROOT: "static"
       MEDIA_URL: "/media/"
       EMAIL_USE_TLS: True
       EMAIL_HOST: ""
