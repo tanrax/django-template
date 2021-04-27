@@ -9,6 +9,10 @@ echo "Apply database migrations"
 python3 manage.py makemigrations
 python3 manage.py migrate
 
+# Apply crons
+python3 manage.py crontab remove
+python3 manage.py crontab add
+
 # Start server
 echo "Starting server"
 uvicorn --host 0.0.0.0 --port 8000 chapps.asgi:application
