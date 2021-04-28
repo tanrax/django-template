@@ -5,6 +5,10 @@ ENV PYTHONUNBUFFERED: 1
 # set work directory
 WORKDIR /usr/src/app
 
+# set time
+RUN ln -fs /usr/share/zoneinfo/Europe/Madrid /etc/localtime
+RUN dpkg-reconfigure -f noninteractive tzdata
+
 # install software
 RUN apt update
 RUN apt install -y build-essential cron python3-pip gettext
