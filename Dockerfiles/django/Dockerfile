@@ -11,7 +11,7 @@ RUN dpkg-reconfigure -f noninteractive tzdata
 
 # install software
 RUN apt update
-RUN apt install -y build-essential cron python3-pip gettext
+RUN apt install -y build-essential python3-pip gettext
 
 # install dependencies
 RUN pip3 install --upgrade pip
