@@ -15,7 +15,7 @@ services:
 
   django:
     build:
-      context: .
+      context: ./
       dockerfile: ./Dockerfiles/django/Dockerfile
     restart: unless-stopped
     entrypoint: /django-launcher.dev.sh
