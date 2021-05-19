@@ -14,7 +14,7 @@ services:
       - 5432
 
   django:
-    build: .
+    build: ./
     restart: always
     entrypoint: /django-launcher.dev.sh
     volumes:
