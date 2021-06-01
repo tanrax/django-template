@@ -2,17 +2,6 @@ version: '3.1'
 
 services:
 
-  db:
-    image: postgres
-    restart: always
-    volumes:
-      - ./../postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: guitarlions
-      POSTGRES_PASSWORD: postgres
-    expose:
-      - 5432
-
   django:
     build: ./
     restart: always
@@ -23,11 +12,7 @@ services:
       DEBUG: "False"
       ALLOWED_HOSTS: ""
       SECRET_KEY: "secret"
-      DB_HOST: db
-      DB_NAME: "guitarlions"
-      DB_USER: "postgres"
-      DB_PASSWORD: "postgres"
-      DB_PORT: "5432"
+      DB: "../database.sqlite"
       DOMAIN: ""
       DOMAIN_URL: "https://"
       STATIC_URL: "/static/"
@@ -41,8 +26,6 @@ services:
       EMAIL_PASSWORD: ""
     expose:
       - 8000
-    depends_on:
-      - db
 
   caddy:
     image: caddy:alpine
