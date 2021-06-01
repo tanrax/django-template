@@ -9,5 +9,7 @@ psycopg2-binary===2.8.6
 channels==2.4.0
 # Conector de Redis para Channels
 channels_redis===3.2.0
+# Pillow
+Pillow===8.2.0
 # Linter
 black
