@@ -2,17 +2,6 @@ version: '3.1'
 
 services:
 
-  db:
-    image: postgres
-    restart: unless-stopped
-    volumes:
-      - ./../postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: api
-      POSTGRES_PASSWORD: postgres
-    expose:
-      - 5432
-
   django:
     build:
       context: ./
@@ -25,11 +14,7 @@ services:
       DEBUG: "True"
       ALLOWED_HOSTS: ""
       SECRET_KEY: ""
-      DB_HOST: db
-      DB_NAME: ""
-      DB_USER: "postgres"
-      DB_PASSWORD: "postgres"
-      DB_PORT: "5432"
+      DB: "database.sqlite"
       DOMAIN: "api.localhost"
       DOMAIN_URL: "http://api.localhost"
       STATIC_URL: "/static/"
@@ -42,8 +27,6 @@ services:
       EMAIL_PASSWORD: ""
     expose:
       - 8000
-    depends_on:
-      - db
 
   caddy:
     image: caddy:alpine
