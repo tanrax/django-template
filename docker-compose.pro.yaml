@@ -39,6 +39,12 @@ services:
         - ./../caddy_data:/data
     depends_on:
       - django
+      
+  redis:
+    image: redis:alpine
+    restart: always
+    expose:
+      - 6379
 
   gulp:
     build: Dockerfiles/gulp
