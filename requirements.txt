@@ -1,10 +1,7 @@
 # Django
 django===3.2
-django-crontab===0.7.1 
 # Servidor para Django
 uvicorn===0.13.4
-# Conector para PostgreSQL
-psycopg2-binary===2.8.6
 # Channels
 channels==2.4.0
 # Conector de Redis para Channels
