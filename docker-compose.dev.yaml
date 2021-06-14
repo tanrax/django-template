@@ -40,6 +40,12 @@ services:
         - .:/usr/src/app/
     depends_on:
       - django
+      
+  redis:
+    image: redis:alpine
+    restart: always
+    expose:
+      - 6379
 
   mailhog:
     image: mailhog/mailhog:latest
