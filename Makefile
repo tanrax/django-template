@@ -2,32 +2,31 @@
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-clean: clean-build clean-pyc
+docker.recreate.django: ## Recreate Django image
+	docker-compose -f docker-compose.dev.yaml build --no-cache --force-rm django
+	docker-compose -f docker-compose.dev.yaml up --force-recreate --no-deps -d django
+	make run.loaddata
 
-clean-build: ## remove build artifacts
-	rm -fr build/
-	rm -fr dist/
-	rm -fr *.egg-info
+run.makemigrations:
+	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "python3 manage.py makemigrations"
 
-clean-pyc: ## remove Python file artifacts
-	find . -name '*.pyc' -exec rm -f {} +
-	find . -name '*.pyo' -exec rm -f {} +
-	find . -name '*~' -exec rm -f {} +
+run.migrate:
+	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "python3 manage.py migrate"
 
-lint: ## check style with flake8
-	flake8 .
-	black --check .
-	node_modules/.bin/prettier --check .
+run.loaddata:
+	# Remove database
+	rm -rf database.sqlite
+	# Remove media
+	rm -rf media
+	# Migrate
+	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "python3 manage.py migrate"
 
-test: ## run tests quickly with the default Python
-	pytest
-
-sdist: clean ## package
-	python setup.py sdist
-	ls -l dist
-
-run.migrations:
-	docker-compose -f docker-compose.dev.yaml run --rm -T --no-deps web sh -c "python manage.py migrate"
-
+run.loaddata.test:
+	make run.loaddata
+	# Add superuser: alias "admin" - password "admin"
+	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "cat data/create_superuser.py | python3 manage.py shell"
+	# Add more users: alias random - password "password"
+	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "cat data/create_users.py | python3 manage.py shell"
+	
 run.server:
 	docker-compose -f docker-compose.dev.yaml up
