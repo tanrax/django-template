@@ -1,8 +1,14 @@
 # Install
 
-## Django
+``` sh
+make docker.recreate.django
+make run.loaddata
+make run.server
+```
 
-https://programadorwebvalencia.com/django-chat-usando-websockets-con-salas-y-async/
+Now open:
+
+`http://api.localhost`
 
 ## Gulp
 
@@ -16,53 +22,56 @@ Run.
 gulp dev
 ```
 
-# Config
+## Tools
 
-## Change path templates
+Lint
 
-In `settings.py`.
-
-``` python
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
+```shell
+make lint
 ```
 
-Update `DIRS`.
+Formatear
 
-``` python
-'DIRS': [str(BASE_DIR) + '/app/templates/'],
+```shell
+make format
 ```
 
-# Run development
+Recrear imagen de Django
 
-``` sh
-make run.server
+```shell
+make docker.recreate.django
 ```
 
-Now open:
+Hacer una nueva migración después de cambiar un model.
 
-`http://api.localhost`
+```shell
+make makemigrations
+```
 
-### Other domains
+Migrar
+
+```shell
+make run.migrate
+```
+
+Cargar data mínima.
+
+```shell
+make run.loaddata
+```
+
+Generar data de desarrollo.
+
+```shell
+make run.loaddata.test
+```
+
+## Other domains
 
 - Caddy: `http://api.localhost`.
-- Gulp: `http://localhost:3000`.
-- Django: `http://localhost:8000`.
-- Mailhog: `http://localhost:8025`.
-- Postgres: `localhost:5432`.
+- Gulp: `http://api.localhost:3000`.
+- Django: `http://api.localhost:8000`.
+- Mailhog: `http://api.localhost:8025`.
 
 ### Bash Django
 
