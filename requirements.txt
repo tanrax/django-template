@@ -11,6 +11,9 @@ channels_redis===3.2.0
 djangorestframework
 markdown
 django-filter
+# Testing
+pytest-django
+pytest
 # Pillow
 Pillow===8.2.0
 # Linter
