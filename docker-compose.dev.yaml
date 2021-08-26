@@ -20,6 +20,8 @@ services:
       STATIC_URL: "/static/"
       STATIC_ROOT: "static"
       MEDIA_URL: "/media/"
+      REDIS_HOST: "redis"
+      REDIS_PORT: "6379"
       EMAIL_HOST: "mailhog"
       EMAIL_USE_TLS: "False"
       EMAIL_PORT: "1025"
