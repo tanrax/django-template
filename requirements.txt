@@ -3,6 +3,7 @@ django===3.2
 django-extensions
 # Servidor para Django
 uvicorn===0.13.4
+websockets
 # Channels
 channels==2.4.0
 # Conector de Redis para Channels
