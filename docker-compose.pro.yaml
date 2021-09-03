@@ -45,7 +45,7 @@ services:
       
   redis:
     image: redis:alpine
-    restart: always
+    restart: unless-stopped
     expose:
       - 6379
 
