@@ -11,4 +11,7 @@ python3 manage.py migrate
 
 # Start server
 echo "Starting server"
-uvicorn --host 0.0.0.0 --port 8000 chapps.asgi:application
+## With WebSockets
+uvicorn --workers=4 --host 0.0.0.0 --port 8000 chapps.asgi:application
+## without WebSockets
+#gunicorn --workers=4 -b 0.0.0.0:8000 gotrucki.wsgi:application
