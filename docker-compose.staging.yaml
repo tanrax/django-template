@@ -2,6 +2,16 @@ version: '3.1'
 
 services:
 
+  postgresql:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sapps
+    expose:
+      - 5432
+
   django:
     build:
       context: ./
@@ -34,6 +44,8 @@ services:
       EMAIL_PASSWORD: ""
     expose:
       - 8000
+    depends_on:
+      - postgresql
 
   caddy:
     image: caddy:alpine
