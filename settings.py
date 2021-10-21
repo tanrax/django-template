@@ -81,21 +81,15 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        "NAME": os.path.join(BASE_DIR, os.environ.get("DB")),
+    "default": {
+        "ENGINE": os.environ.get("DB_ENGINE"),
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST"),
+        "PORT": os.environ.get("DB_PORT"),
     }
 }
-
-def init_command_sqlite(sender, connection, **kwargs):
-    """Enable initial config sqlite."""
-    if connection.vendor == "sqlite":
-        cursor = connection.cursor()
-        cursor.execute("PRAGMA locking_mode=exclusive;")
-        cursor.execute("PRAGMA journal_mode=wal;")
-        cursor.execute("PRAGMA synchronous=full;")
-
-connection_created.connect(init_command_sqlite)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
