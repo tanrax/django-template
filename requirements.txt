@@ -20,6 +20,8 @@ django-filter
 # Template
 ## Componentes - https://mitchel.me/slippers/
 slippers
+# WYSIWYG editor Python Django admin
+django-tinymce===3.3.0
 # Testing
 pytest-django
 pytest
