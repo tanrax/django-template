@@ -14,7 +14,8 @@ RUN dpkg-reconfigure -f noninteractive tzdata
 
 # install software
 RUN apt update
-RUN apt install -y build-essential python3 python3-pip sqlite3 gettext
+RUN apt install -y build-essential python3-dev libpq-dev python3-pip sqlite3 gettext
+
 
 # install dependencies
 RUN pip3 install --upgrade pip
