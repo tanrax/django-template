@@ -2,6 +2,16 @@ version: '3.1'
 
 services:
 
+  postgresql:
+    image: postgres
+    restart: "no"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nombre-base-de-datos
+    ports:
+      - 5432:5432
+
   django:
     build:
       context: ./
@@ -12,14 +22,14 @@ services:
       - .:/usr/src/app/
     environment:
       DEBUG: "True"
-      ALLOWED_HOSTS: ""
-      SECRET_KEY: ""
-      DB_ENGINE: "django.db.backends.sqlite3"
-      DB_NAME: "database.sqlite"
-      DB_USER: ""
-      DB_PASSWORD: ""
-      DB_HOST: ""
-      DB_PORT: ""
+      ALLOWED_HOSTS: "ejemplo.localhost"
+      SECRET_KEY: "misecreto"
+      DB_ENGINE: "django.db.backends.postgresql"
+      DB_NAME: "nombre-base-de-datos"
+      DB_USER: "postgres"
+      DB_PASSWORD: "postgres"
+      DB_HOST: "postgresql"
+      DB_PORT: "5432"
       DOMAIN: "ejemplo.localhost"
       DOMAIN_URL: "http://ejemplo.localhost"
       STATIC_URL: "/static/"
@@ -34,6 +44,8 @@ services:
       EMAIL_PASSWORD: ""
     expose:
       - 8000
+    depends_on:
+      - postgresql
 
   caddy:
     image: caddy:alpine
