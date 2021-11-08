@@ -1,4 +1,4 @@
-FROM debian:stable-slim
+FROM debian:11
 
 # Prevents Python from writing pyc files to disc (equivalent to python -B option)
 ENV PYTHONDONTWRITEBYTECODE 1
