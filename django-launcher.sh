@@ -12,6 +12,6 @@ python3 manage.py migrate
 # Start server
 echo "Starting server"
 ## With WebSockets
-uvicorn --workers=4 --host 0.0.0.0 --port 8000 chapps.asgi:application
+uvicorn --host 0.0.0.0 --port 8000 --reload ccstech.asgi:application
 ## without WebSockets
-#gunicorn --workers=4 -b 0.0.0.0:8000 gotrucki.wsgi:application
+#gunicorn --workers=4 -b 0.0.0.0:8000 --reload ccstech.wsgi:application

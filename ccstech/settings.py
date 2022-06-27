@@ -42,10 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'rest_framework',
-    'app.account',
-    'app.auction',
-    'app.notification',
+    'app.website',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'gotrucki.urls'
+ROOT_URLCONF = 'ccstech.urls'
 
 TEMPLATES = [
     {

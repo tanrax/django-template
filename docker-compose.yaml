@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.8'
 
 services:
 
@@ -6,9 +6,9 @@ services:
     image: postgres
     restart: "no"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: nombre-base-de-datos
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "ccstech"
     ports:
       - 5432:5432
 
@@ -16,22 +16,22 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfiles/django/Dockerfile
-    restart: unless-stopped
-    entrypoint: /django-launcher.dev.sh
+    restart: "no"
+    entrypoint: /django-launcher.sh
     volumes:
       - .:/usr/src/app/
     environment:
       DEBUG: "True"
-      ALLOWED_HOSTS: "ejemplo.localhost"
+      ALLOWED_HOSTS: "ccstech.localhost"
       SECRET_KEY: "misecreto"
       DB_ENGINE: "django.db.backends.postgresql"
-      DB_NAME: "nombre-base-de-datos"
+      DB_NAME: "ccstech"
       DB_USER: "postgres"
       DB_PASSWORD: "postgres"
       DB_HOST: "postgresql"
       DB_PORT: "5432"
-      DOMAIN: "ejemplo.localhost"
-      DOMAIN_URL: "http://ejemplo.localhost"
+      DOMAIN: "ccstech.localhost"
+      DOMAIN_URL: "http://ccstech.localhost"
       STATIC_URL: "/static/"
       STATIC_ROOT: "static"
       MEDIA_URL: "/media/"
@@ -49,26 +49,26 @@ services:
 
   caddy:
     image: caddy:alpine
-    restart: unless-stopped
+    restart: "no"
     ports:
         - 80:80
         - 443:443
     volumes:
-        - ./Caddyfile.dev:/etc/caddy/Caddyfile
-        - ./../caddy_data:/data
+        - ./Caddyfile:/etc/caddy/Caddyfile
+        - ./caddy_data:/data
         - .:/usr/src/app/
     depends_on:
       - django
       
   redis:
     image: redis:alpine
-    restart: unless-stopped
+    restart: "no"
     expose:
       - 6379
 
   mailhog:
     image: mailhog/mailhog:latest
-    restart: unless-stopped
+    restart: "no"
     expose:
         - 1025
     ports:

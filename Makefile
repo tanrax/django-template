@@ -9,15 +9,15 @@ format: ## Format style with black
 	black --exclude="/(postgres|venv|migrations|\.git)/" .
 
 docker.recreate.django: ## Recreate Django image
-	docker-compose -f docker-compose.dev.yaml build --no-cache --force-rm django
-	docker-compose -f docker-compose.dev.yaml up --force-recreate --no-deps -d django
+	docker-compose -f docker-compose.yaml build --no-cache --force-rm django
+	docker-compose -f docker-compose.yaml up --force-recreate --no-deps -d django
 	make run.loaddata
 
 run.makemigrations: ## Makemigrations
-	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "python3 manage.py makemigrations"
+	docker-compose -f docker-compose.yaml exec -T django bash -c "python3 manage.py makemigrations"
 
 run.migrate: ## Migrate
-	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "python3 manage.py migrate"
+	docker-compose -f docker-compose.yaml exec -T django bash -c "python3 manage.py migrate"
 
 run.loaddata: ## Load initial data
 	# Remove database
@@ -25,14 +25,14 @@ run.loaddata: ## Load initial data
 	# Remove media
 	rm -rf media
 	# Migrate
-	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "python3 manage.py migrate"
+	docker-compose -f docker-compose.yaml exec -T django bash -c "python3 manage.py migrate"
 
 run.loaddata.test: ## Load initial data test
 	make run.loaddata
 	# Add superuser: alias "admin" - password "admin"
-	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "cat data/create_superuser.py | python3 manage.py shell"
+	docker-compose -f docker-compose.yaml exec -T django bash -c "cat data/create_superuser.py | python3 manage.py shell"
 	# Add more users: alias random - password "password"
-	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "cat data/create_users.py | python3 manage.py shell"
+	docker-compose -f docker-compose.yaml exec -T django bash -c "cat data/create_users.py | python3 manage.py shell"
 
 run.server: ## Run server
-	docker-compose -f docker-compose.dev.yaml up
+	docker-compose -f docker-compose.yaml up

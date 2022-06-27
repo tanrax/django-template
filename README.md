@@ -8,7 +8,7 @@ make run.server
 
 Now open:
 
-`http://api.localhost`
+`http://ccstech.localhost`
 
 ## Gulp
 
@@ -68,15 +68,15 @@ make run.loaddata.test
 
 ## Other domains
 
-- Caddy: `http://api.localhost`.
-- Gulp: `http://api.localhost:3000`.
-- Django: `http://api.localhost:8000`.
-- Mailhog: `http://api.localhost:8025`.
+- Caddy: `http://ccstech.localhost`.
+- Gulp: `http://ccstech.localhost:3000`.
+- Django: `http://ccstech.localhost:8000`.
+- Mailhog: `http://ccstech.localhost:8025`.
 
 ### Bash Django
 
 ``` shell
-docker exec -it api_django_1 bash
+docker exec -it ccstech_django_1 bash
 ```
 
 # Run production
@@ -85,4 +85,4 @@ docker exec -it api_django_1 bash
 docker-compose -f docker-compose.pro.yaml up
 ```
 
-Open `https://domain.com`.
+Open `https://ccstech.io`.

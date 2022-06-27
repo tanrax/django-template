@@ -1,2 +1,4 @@
-
+.env
 .idea/*
+static/admin/
+static/django_extensions/
