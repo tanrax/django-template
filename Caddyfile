@@ -1,4 +1,4 @@
-http://ccstech.localhost
+{$DOMAIN_URL}
 
 root * /usr/src/app/
 
