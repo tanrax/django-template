@@ -75,6 +75,7 @@ services:
 
   mailhog:
     image: mailhog/mailhog:latest
+    container_name: ${PROJECT_NAME}-mailhog
     restart: "no"
     expose:
         - 1025
