@@ -26,7 +26,6 @@ services:
       DEBUG: "False"
       ALLOWED_HOSTS: ${DOMAIN}
       SECRET_KEY: ${DJANGO_SECRET_KEY}
-      DB_ENGINE: django.db.backends.postgresql
       DB_NAME:  ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
@@ -60,7 +59,7 @@ services:
         - ${CADDY_PORT_ONE}:80
         - ${CADDY_PORT_TWO}:443
     volumes:
-        - ./Caddyfile:/etc/caddy/Caddyfile
+        - ./Caddyfile.pro:/etc/caddy/Caddyfile
         - ./caddy_data:/data
         - .:/usr/src/app/
     depends_on:

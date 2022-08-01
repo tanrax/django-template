@@ -1,4 +1,4 @@
-{$DOMAIN_URL}
+https://here.project
 
 root * /usr/src/app/
 

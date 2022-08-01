@@ -2,11 +2,11 @@
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-lint: ## Check style with black
-	black --check --exclude="/(postgres|venv|migrations|\.git)/" .
-
 format: ## Format style with black
-	black --exclude="/(postgres|venv|migrations|\.git)/" .
+	black --exclude="/(postgres_data|venv|migrations|\.git)/" core/ apps/ scripts/ tests/
+
+test: ## Tests
+	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "pytest"
 
 docker.recreate.django: ## Recreate Django image
 	docker-compose -f docker-compose.dev.yaml build --no-cache --force-rm django

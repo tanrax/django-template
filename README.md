@@ -8,7 +8,7 @@ make run.server
 
 Now open:
 
-`http://template.localhost`
+`http://here.project.localhost`
 
 ## Gulp
 
@@ -68,15 +68,15 @@ make run.loaddata.test
 
 ## Other domains
 
-- Caddy: `http://template.localhost`.
-- Gulp: `http://template.localhost:3000`.
-- Django: `http://template.localhost:8000`.
-- Mailhog: `http://template.localhost:8025`.
+- Caddy: `http://here.project.localhost`.
+- Gulp: `http://here.project.localhost:3000`.
+- Django: `http://here.project.localhost:8000`.
+- Mailhog: `http://here.project.localhost:8025`.
 
 ### Bash Django
 
 ``` shell
-docker exec -it template-django bash
+docker exec -it here.project-django bash
 ```
 
 # Run production
@@ -89,14 +89,14 @@ Open `https://template.io`.
 
 # Enviroment (.env)
 ```text
-PROJECT_NAME=template
+PROJECT_NAME=here.project
 
 # Domain
-DOMAIN=template.localhost
-DOMAIN_URL=http://template.localhost
+DOMAIN=here.project.localhost
+DOMAIN_URL=http://here.project.localhost
 
 # Database
-DB_NAME=template_db
+DB_NAME=project_db
 DB_USER=postgres
 DB_PASSWORD=postgres
 DB_HOST=postgresql
@@ -114,8 +114,8 @@ CADDY_PORT_ONE=80
 CADDY_PORT_TWO=443
 
 # Email
-DEFAULT_FROM_EMAIL=no-reply@template.localhost
-EMAIL_CONTACT=info@template.localhost
+DEFAULT_FROM_EMAIL=no-reply@here.project.localhost
+EMAIL_CONTACT=info@here.project.localhost
 EMAIL_HOST=mailhog
 EMAIL_USER=
 EMAIL_PASSWORD=
