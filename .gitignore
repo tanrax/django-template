@@ -2,3 +2,4 @@
 .idea/*
 static/admin/
 static/django_extensions/
+static/rest_framework/
