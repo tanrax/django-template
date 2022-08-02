@@ -89,7 +89,7 @@ Open `https://proyect.com`.
 
 # Enviroment (.env)
 ```text
-PROJECT_NAME=here.project
+PROJECT_NAME=project
 
 # Domain
 DOMAIN=project.localhost
