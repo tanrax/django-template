@@ -1,4 +1,4 @@
-http://here.project.localhost {
+http://project.localhost {
 
     root * /usr/src/app/
     encode gzip zstd

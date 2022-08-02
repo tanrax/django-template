@@ -19,7 +19,6 @@ RUN apt install -y build-essential python3-dev libpq-dev python3-pip gettext
 
 # install dependencies
 RUN pip3 install --upgrade pip
-# install basic dependencies
 COPY ./requirements.txt .
 RUN pip3 install -r requirements.txt
 

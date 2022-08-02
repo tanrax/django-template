@@ -1,4 +1,4 @@
-https://here.project
+https://project.com
 
 root * /usr/src/app/
 

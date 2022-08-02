@@ -23,7 +23,7 @@ run.loaddata: ## Load initial data
 	# Remove database
 	docker-compose exec -T django bash -c "python3 manage.py flush --noinput"
 	# Remove media
-	sudo rm -rf media/categories/*
+	rm -rf media
 	# Migrate
 	docker-compose exec -T django bash -c "python3 manage.py migrate"
 

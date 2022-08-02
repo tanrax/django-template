@@ -78,5 +78,3 @@ services:
     restart: "no"
     expose:
         - 1025
-    ports:
-        - ${MAILHOG_PORT}:8025
