@@ -1,4 +1,4 @@
-http://ccstech.localhost
+https://project.com
 
 root * /usr/src/app/
 

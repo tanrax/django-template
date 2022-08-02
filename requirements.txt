@@ -1,18 +1,31 @@
 # Django
-django===4.0.5
-django-extensions===3.1.5
+django===4.0.6
+django-extensions===3.2.0
+dj-database-url==0.5.0
+
+# Django REST
+djangorestframework==3.13.1
+django-cors-headers==3.10.0
+
 # PostgreSQL driver
 psycopg2-binary===2.9.3
-# Servidor para Django sin Websockets
-gunicorn===20.1.0
-# Servidor para Django con Websockets
-uvicorn===0.18.1
-websockets===10.3
-# Channels
-channels==3.0.5
+
+# Check connection
+redis==4.3.4
+
+# Django Server
+daphne===3.0.2
 asgiref===3.5.2
-# Conector de Redis para Channels
-channels_redis===3.4.0
-# Template
-# Pillow
-Pillow===9.1.1
+
+# Templates
+## Image processing
+Pillow===9.2.0
+
+# Testing
+pytest==7.1.2
+pytest-django==4.5.2
+
+# Quality code
+black==22.6.0
+flake8==4.0.1
+isort==5.10.1
