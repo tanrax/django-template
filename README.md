@@ -106,8 +106,7 @@ DB_PORT=5432
 DJANGO_SECRET_KEY=mysecret
 
 # Redis
-REDIS_HOST=redis
-REDIS_PORT=6379
+REDIS_URI="redis://:@redis:6379"
 
 # Caddy
 CADDY_PORT_ONE=80
