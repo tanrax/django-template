@@ -36,7 +36,7 @@ services:
       STATIC_URL: /static/
       STATIC_ROOT: static
       MEDIA_URL: /media/
-      REDIS_HOST: ${REDIS_HOST}
+      REDIS_URI: ${REDIS_URI}
       REDIS_PORT: ${REDIS_PORT}
       EMAIL_HOST: ${EMAIL_HOST}
       EMAIL_USE_TLS: ${EMAIL_USE_TLS}
