@@ -26,7 +26,7 @@ cp env.example .env
 2. Load fake data
 
 ``` bash
-make run.loaddata.test
+make run.loaddata.fake
 ```
 
 ### Run Gulp
@@ -44,7 +44,7 @@ make docker.recreate.django
 ### Load fake data
 
 ```
-make run.loaddata.test
+make run.loaddata.fake
 ```
 
 ## Production
