@@ -1,26 +1,72 @@
-# Install
+# Requirements
 
-``` sh
-make docker.recreate.django
-make run.loaddata
-make run.server
+- [Docker](https://www.docker.com/).
+- [Docker Compose](https://docs.docker.com/compose/install/).
+
+# Run 🏃
+
 ```
-
-Now open:
-
-`http://project.localhost`
-
-## Gulp
-
-```shell
 npm i
+gulp
+docker-compose up
 ```
 
-Run.
+Open the browser at `http://ruralmeet.localhost/`.
 
-```shell
+# Installation
+
+## Development
+
+1. Create .env file.
+
+```bash
+cp .env.example .env
+```
+
+2. Load fake data
+
+``` bash
+make run.loaddata.test
+```
+
+### Run Gulp
+
+```
 gulp dev
 ```
+
+### Recreate docker
+
+```
+make docker.recreate.django
+```
+
+### Load fake data
+
+```
+make run.loaddata.test
+```
+
+## Production
+
+1. Create .env file.
+
+```bash
+cp .env.example .env
+```
+
+2. Load minimum data
+
+``` bash
+make run.loaddata
+```
+
+3. Create superuser
+
+``` bash
+docker-compose exec -T django bash -c "python3 manage.py createsuperuser"
+```
+
 
 ## Tools
 
@@ -86,39 +132,3 @@ docker-compose -f docker-compose.pro.yaml up
 ```
 
 Open `https://proyect.com`.
-
-# Enviroment (.env)
-```text
-PROJECT_NAME=project
-
-# Domain
-DOMAIN=project.localhost
-DOMAIN_URL=http://project.localhost
-
-# Database
-DB_NAME=project_db
-DB_USER=postgres
-DB_PASSWORD=postgres
-DB_HOST=postgresql
-DB_PORT=5432
-
-# Django options
-DJANGO_SECRET_KEY=mysecret
-
-# Redis
-REDIS_URI="redis://:@redis:6379"
-
-# Caddy
-CADDY_PORT_ONE=80
-CADDY_PORT_TWO=443
-
-# Email
-DEFAULT_FROM_EMAIL=no-reply@project.localhost
-EMAIL_CONTACT=info@project.localhost
-EMAIL_HOST=mailhog
-EMAIL_USER=
-EMAIL_PASSWORD=
-EMAIL_PORT=1025
-EMAIL_USE_TLS=False
-EMAIL_USE_SSL=False
-```
