@@ -27,7 +27,7 @@ run.loaddata: ## Load initial data
 	# Migrate
 	docker-compose exec -T django bash -c "python3 manage.py migrate"
 
-run.loaddata.test: ## Load initial data test
+run.loaddata.fake: ## Load initial data test
 	make run.loaddata
 	# Add superuser: alias "admin" - password "admin"
 	docker-compose -f docker-compose.dev.yaml exec -T django bash -c "cat data/create_superuser.py | python3 manage.py shell"
