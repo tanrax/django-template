@@ -6,8 +6,6 @@
 # Run 🏃
 
 ```
-npm i
-gulp
 docker-compose up
 ```
 
@@ -124,11 +122,3 @@ make run.loaddata.test
 ``` shell
 docker exec -it project-django bash
 ```
-
-# Run production
-
-``` sh
-docker-compose -f docker-compose.pro.yaml up
-```
-
-Open `https://proyect.com`.
