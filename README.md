@@ -20,7 +20,7 @@ Open the browser at `http://ruralmeet.localhost/`.
 1. Create .env file.
 
 ```bash
-cp .env.example .env
+cp env.example .env
 ```
 
 2. Load fake data
@@ -52,7 +52,7 @@ make run.loaddata.test
 1. Create .env file.
 
 ```bash
-cp .env.example .env
+cp env.example .env
 ```
 
 2. Load minimum data
