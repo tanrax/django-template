@@ -78,3 +78,14 @@ services:
     restart: "no"
     expose:
         - 1025
+
+  gulp:
+    build:
+      context: ./
+      dockerfile: Dockerfile.gulp
+    container_name: ${PROJECT_NAME}-gulp
+    entrypoint: gulp
+    restart: "no"
+    volumes:
+      - .:/usr/src/app/
+      - /usr/src/app/node_modules
