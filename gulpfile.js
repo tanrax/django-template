@@ -4,7 +4,7 @@
 const { src, dest, parallel, series, watch } = require('gulp');
 const browserSync = require('browser-sync').create();
 const clean = require('gulp-clean');
-const sass = require('gulp-sass');
+const sass = require('gulp-dart-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const ts = require('gulp-typescript');
 const iconfont = require('gulp-iconfont');
