@@ -13,6 +13,10 @@ import os
 import dj_database_url
 from pathlib import Path
 from django.db.backends.signals import connection_created
+from supertokens_python import init, InputAppInfo, SupertokensConfig, get_all_cors_headers
+from supertokens_python.recipe import emailpassword, session, dashboard
+from typing import List
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +33,39 @@ DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = []
 
+DOMAIN = os.environ.get("DOMAIN")
+DOMAIN_URL = os.environ.get("DOMAIN_URL")
+DOMAIN_FRONTEND_URL = os.environ.get("DOMAIN_FRONTEND_URL")
+
+# Supertokens
+SUPERTOKENS_CORE_URL = os.environ.get("SUPERTOKENS_CORE_URL")
+SUPERTOKENS_CORE_API_KEY = os.environ.get("SUPERTOKENS_CORE_API_KEY")
+
+## Configure Supertokens
+
+init(
+    app_info=InputAppInfo(
+        app_name="SuperTokens",
+        api_domain=DOMAIN_URL,
+        website_domain=DOMAIN_FRONTEND_URL,
+        api_base_path="/auth",
+        website_base_path="/"
+    ),
+    supertokens_config=SupertokensConfig(
+        # These are the connection details of the app you created on supertokens.com
+        # Example: "https://dev-6e871021172811ee844ab3cffaefa3b6-eu-west-1.aws.supertokens.io:3569"
+        connection_uri=SUPERTOKENS_CORE_URL,
+        api_key=SUPERTOKENS_CORE_API_KEY,
+    ),
+    framework="django",
+    recipe_list=[
+        session.init(), # initializes session features
+        emailpassword.init(),
+        dashboard.init(),
+    ],
+    mode="asgi", # use wsgi if you are running django server in sync mode
+)
+
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(",")
 if not os.environ.get("ALLOWED_HOSTS") == None:
     ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(",")
@@ -36,6 +73,8 @@ if not os.environ.get("ALLOWED_HOSTS") == None:
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
+    "supertokens_python",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -47,7 +86,22 @@ INSTALLED_APPS = [
     "apps.website",
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    DOMAIN_FRONTEND_URL,
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    DOMAIN_FRONTEND_URL,
+]
+
+CORS_ALLOW_HEADERS: List[str] = list(default_headers) + [
+    "Content-Type"
+] + get_all_cors_headers()
+
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -55,6 +109,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "supertokens_python.framework.django.django_middleware.middleware",
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -123,9 +178,6 @@ STATIC_ROOT = os.environ.get("STATIC_ROOT")
 STATIC_URL = os.environ.get("STATIC_URL")
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = os.environ.get("MEDIA_URL")
-
-DOMAIN = os.environ.get("DOMAIN")
-DOMAIN_URL = os.environ.get("DOMAIN_URL")
 
 
 # Email configuration

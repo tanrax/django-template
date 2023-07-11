@@ -17,13 +17,13 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfiles/django/Dockerfile
-    container_name: ${PROJECT_NAME}-django
+    container_name: ${PROJECT_NAME}_django
     restart: "no"
     entrypoint: /django-launcher.sh
     volumes:
       - .:/usr/src/app/
     environment:
-      DEBUG: "False"
+      DEBUG: ${DEBUG}
       ALLOWED_HOSTS: ${DOMAIN}
       SECRET_KEY: ${DJANGO_SECRET_KEY}
       DB_NAME:  ${DB_NAME}
@@ -33,6 +33,7 @@ services:
       DB_PORT: ${DB_PORT}
       DOMAIN: ${DOMAIN}
       DOMAIN_URL:  ${DOMAIN_URL}
+      DOMAIN_FRONTEND_URL: ${DOMAIN_FRONTEND_URL}
       STATIC_URL: /static/
       STATIC_ROOT: static
       MEDIA_URL: /media/
@@ -44,6 +45,8 @@ services:
       EMAIL_PORT: ${EMAIL_PORT}
       EMAIL_USER: ${EMAIL_USER}
       EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+      SUPERTOKENS_CORE_URL: ${SUPERTOKENS_CORE_URL}
+      SUPERTOKENS_CORE_API_KEY: ${SUPERTOKENS_CORE_API_KEY}
     expose:
       - 8000
     depends_on:
