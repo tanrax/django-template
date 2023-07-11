@@ -17,7 +17,7 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfiles/django/Dockerfile
-    container_name: ${PROJECT_NAME}_django
+    container_name: ${PROJECT_NAME}-django
     restart: "no"
     entrypoint: /django-launcher.sh
     volumes:
