@@ -22,28 +22,8 @@ services:
     entrypoint: /django-launcher.sh
     volumes:
       - .:/usr/src/app/
-    environment:
-      DEBUG: "False"
-      ALLOWED_HOSTS: ${DOMAIN}
-      SECRET_KEY: ${DJANGO_SECRET_KEY}
-      DB_NAME:  ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DOMAIN: ${DOMAIN}
-      DOMAIN_URL:  ${DOMAIN_URL}
-      STATIC_URL: /static/
-      STATIC_ROOT: static
-      MEDIA_URL: /media/
-      REDIS_URI: ${REDIS_URI}
-      REDIS_PORT: ${REDIS_PORT}
-      EMAIL_HOST: ${EMAIL_HOST}
-      EMAIL_USE_TLS: ${EMAIL_USE_TLS}
-      EMAIL_USE_SSL: ${EMAIL_USE_SSL}
-      EMAIL_PORT: ${EMAIL_PORT}
-      EMAIL_USER: ${EMAIL_USER}
-      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+    env_file:
+      - .env
     expose:
       - 8000
     depends_on:
@@ -56,8 +36,8 @@ services:
     container_name: ${PROJECT_NAME}-caddy
     restart: "no"
     ports:
-        - ${CADDY_PORT_ONE}:80
-        - ${CADDY_PORT_TWO}:443
+        - ${CADDY_PORT_HTTP}:80
+        - ${CADDY_PORT_HTTPS}:443
     volumes:
         - ./Caddyfile.dev:/etc/caddy/Caddyfile
         - ./caddy_data:/data
