@@ -29,7 +29,11 @@ function initBrowserSync(cb) {
     browserSync.init({
         notify: false,
         open: false,
-        proxy: 'http://localhost'
+        proxy: 'http://django.localhost',
+	ws: true,
+	socket: {
+	    domain: 'gulp-socket.localhost'
+	}
     });
     return cb;
 }

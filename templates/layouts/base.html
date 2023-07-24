@@ -113,10 +113,15 @@
             content=""
         >
         <link
-            rel="stylesheet"
-            type="text/css"
-            href="{% static 'css/main.css' %}"
-        >
+	    href="{% static 'css/mobile.css' %}"
+	    rel="stylesheet"
+	    media="all and (max-width: 600px)"
+	>
+        <link
+	    href="{% static 'css/desktop.css' %}"
+	    rel="stylesheet"
+	    media="all and (min-width: 600px)"
+	>
     </head>
     <body>
 	{% block content %}{% endblock %}
